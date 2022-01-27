@@ -58,6 +58,13 @@ function Form() {
     { des: "躺在床上用想像力實作", value: "1" },
     { des: "趴在地上滑手機找現成的", value: "2" },
   ];
+  const errMsg = [
+    "請輸入暱稱",
+    "請輸入電子郵件",
+    "請輸入手機號碼",
+    "請輸入回答",
+    "請輸入類型",
+  ];
   return (
     <Styledform>
       <Styledtitle>新拖延運動報名表單</Styledtitle>
@@ -74,6 +81,9 @@ function Form() {
         labelTitle={"暱稱"}
         inputValue={nickname}
         placeholder={"您的暱稱"}
+        isBlank={nickname.isBlank}
+        handleIsBlank={nickname.handleIsBlank}
+        errorMessage={errMsg[0]}
       ></Input>
       <Input
         className="required"
@@ -82,6 +92,9 @@ function Form() {
         labelTitle={"電子郵件"}
         inputValue={email}
         placeholder={"您的電子郵件"}
+        isBlank={email.isBlank}
+        handleIsBlank={email.handleIsBlank}
+        errorMessage={errMsg[1]}
       ></Input>
       <Input
         className="required"
@@ -90,6 +103,9 @@ function Form() {
         labelTitle={"手機號碼"}
         inputValue={phoneNumber}
         placeholder={"您的手機號碼"}
+        isBlank={phoneNumber.isBlank}
+        handleIsBlank={phoneNumber.handleIsBlank}
+        errorMessage={errMsg[2]}
       ></Input>
       <Input
         className="required"
@@ -98,6 +114,9 @@ function Form() {
         labelTitle={"怎麼知道這個活動的"}
         inputValue={question}
         placeholder={"您的回答"}
+        isBlank={question.isBlank}
+        handleIsBlank={question.handleIsBlank}
+        errorMessage={errMsg[3]}
       ></Input>
       <Radio
         className="required"
@@ -105,6 +124,9 @@ function Form() {
         labelTitle={"報名類型"}
         radioOption={radioOption}
         inputValue={type}
+        isBlank={type.isBlank}
+        handleIsBlank={type.handleIsBlank}
+        errorMessage={errMsg[4]}
       ></Radio>
       <Input
         id={"other"}

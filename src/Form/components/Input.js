@@ -28,6 +28,11 @@ const Styledinput = styled.div`
     margin-top: 0px;
     margin-bottom: 20px;
   }
+  & > span {
+    margin-top: 8px;
+    color: red;
+    font-weight: bold;
+  }
 `;
 
 export default function Input({
@@ -38,6 +43,8 @@ export default function Input({
   labelTitle,
   subTitle,
   className,
+  isBlank,
+  errorMessage,
 }) {
   return (
     <Styledinput className={className}>
@@ -50,6 +57,7 @@ export default function Input({
         value={inputValue.value}
         onChange={inputValue.handleInputChange}
       ></input>
+      {isBlank ? <span>{errorMessage}</span> : ""}
     </Styledinput>
   );
 }
