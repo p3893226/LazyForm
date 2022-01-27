@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useInputs from "./hook/useInputs";
 import Input from "./components/Input";
+import Radio from "./components/Radio";
 
 const Styledform = styled.form`
   margin: auto;
@@ -9,6 +10,15 @@ const Styledform = styled.form`
   margin-top: 129px;
   box-shadow: 1.8px 2.4px 5px 0 #0000004c;
   border-top: solid 10px #fad312;
+  > p {
+    font-size: 14px;
+  }
+  .required > :first-child::after {
+    content: "*";
+    color: #e74149;
+    font-size: 1.3rem;
+    margin-left: 5px;
+  }
 `;
 
 const Styledtitle = styled.h1`
@@ -28,6 +38,14 @@ const Styledwarning = styled.p`
   margin-top: 22px;
   margin-bottom: 55px;
 `;
+const Styledsubmit = styled.input`
+  font-size: 15px;
+  margin-bottom: 21px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 3px;
+  background: #fad312;
+`;
 
 function Form() {
   const nickname = useInputs();
@@ -35,6 +53,11 @@ function Form() {
   const phoneNumber = useInputs();
   const question = useInputs();
   const other = useInputs();
+  const type = useInputs();
+  const radioOption = [
+    { des: "躺在床上用想像力實作", value: "1" },
+    { des: "趴在地上滑手機找現成的", value: "2" },
+  ];
   return (
     <Styledform>
       <Styledtitle>新拖延運動報名表單</Styledtitle>
@@ -44,6 +67,55 @@ function Form() {
         活動地點:台北市大安區新生南路二段1號
       </Styledactivity>
       <Styledwarning>*必填</Styledwarning>
+      <Input
+        className="required"
+        id={"nickname"}
+        type={"text"}
+        labelTitle={"暱稱"}
+        inputValue={nickname}
+        placeholder={"您的暱稱"}
+      ></Input>
+      <Input
+        className="required"
+        id={"email"}
+        type={"email"}
+        labelTitle={"電子郵件"}
+        inputValue={email}
+        placeholder={"您的電子郵件"}
+      ></Input>
+      <Input
+        className="required"
+        id={"phoneNumber"}
+        type={"tel"}
+        labelTitle={"手機號碼"}
+        inputValue={phoneNumber}
+        placeholder={"您的手機號碼"}
+      ></Input>
+      <Input
+        className="required"
+        id={"question"}
+        type={"text"}
+        labelTitle={"怎麼知道這個活動的"}
+        inputValue={question}
+        placeholder={"您的回答"}
+      ></Input>
+      <Radio
+        className="required"
+        name={"enroll"}
+        labelTitle={"報名類型"}
+        radioOption={radioOption}
+        inputValue={type}
+      ></Radio>
+      <Input
+        id={"other"}
+        type={"text"}
+        labelTitle={"其他"}
+        subTitle={"對活動的一些建議"}
+        inputValue={other}
+        placeholder={"您的回答"}
+      ></Input>
+      <Styledsubmit type="submit" className="submit"></Styledsubmit>
+      <p>請勿透過表單送出您的密碼。</p>
     </Styledform>
   );
 }
