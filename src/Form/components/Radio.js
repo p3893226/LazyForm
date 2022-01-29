@@ -16,6 +16,11 @@ const Styledradio = styled.div`
   & > label:last-child {
     margin-bottom: 42px;
   }
+  & > span {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+  }
 `;
 
 export default function Radio({
@@ -24,6 +29,10 @@ export default function Radio({
   labelTitle,
   radioOption,
   inputValue,
+  isBlank,
+  errorMessage,
+  setData,
+  data,
 }) {
   return (
     <Styledradio className={className}>
@@ -34,11 +43,18 @@ export default function Radio({
             type="radio"
             name={name}
             value={option.value}
-            onChange={() => inputValue.setValue(option.value)}
+            onChange={(e) => {
+              inputValue.setValue(option.value);
+              setData({
+                ...data,
+                type: option.des,
+              });
+            }}
           />
           {option.des}
         </label>
       ))}
+      {isBlank && <span>{errorMessage}</span>}
     </Styledradio>
   );
 }

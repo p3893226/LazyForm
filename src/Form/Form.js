@@ -2,6 +2,7 @@ import styled from "styled-components";
 import useInputs from "./hook/useInputs";
 import Input from "./components/Input";
 import Radio from "./components/Radio";
+import Footer from "./components/Footer";
 
 const Styledform = styled.form`
   margin: auto;
@@ -48,6 +49,14 @@ const Styledsubmit = styled.input`
 `;
 
 function Form() {
+  const { isBlankData, setData, data, handleSubmitClick } = useInputs();
+  const {
+    nickname: isNicknameBlank,
+    email: isEmailBlank,
+    phoneNumber: isPhoneNumberBlank,
+    question: isQuestionBlank,
+    type: isTypeBlank,
+  } = isBlankData;
   const nickname = useInputs();
   const email = useInputs();
   const phoneNumber = useInputs();
@@ -66,79 +75,89 @@ function Form() {
     "請輸入類型",
   ];
   return (
-    <Styledform>
-      <Styledtitle>新拖延運動報名表單</Styledtitle>
-      <Styledactivity>
-        活動日期:2020/12/10 ~ 2020/12/11
-        <br />
-        活動地點:台北市大安區新生南路二段1號
-      </Styledactivity>
-      <Styledwarning>*必填</Styledwarning>
-      <Input
-        className="required"
-        id={"nickname"}
-        type={"text"}
-        labelTitle={"暱稱"}
-        inputValue={nickname}
-        placeholder={"您的暱稱"}
-        isBlank={nickname.isBlank}
-        handleIsBlank={nickname.handleIsBlank}
-        errorMessage={errMsg[0]}
-      ></Input>
-      <Input
-        className="required"
-        id={"email"}
-        type={"email"}
-        labelTitle={"電子郵件"}
-        inputValue={email}
-        placeholder={"您的電子郵件"}
-        isBlank={email.isBlank}
-        handleIsBlank={email.handleIsBlank}
-        errorMessage={errMsg[1]}
-      ></Input>
-      <Input
-        className="required"
-        id={"phoneNumber"}
-        type={"tel"}
-        labelTitle={"手機號碼"}
-        inputValue={phoneNumber}
-        placeholder={"您的手機號碼"}
-        isBlank={phoneNumber.isBlank}
-        handleIsBlank={phoneNumber.handleIsBlank}
-        errorMessage={errMsg[2]}
-      ></Input>
-      <Input
-        className="required"
-        id={"question"}
-        type={"text"}
-        labelTitle={"怎麼知道這個活動的"}
-        inputValue={question}
-        placeholder={"您的回答"}
-        isBlank={question.isBlank}
-        handleIsBlank={question.handleIsBlank}
-        errorMessage={errMsg[3]}
-      ></Input>
-      <Radio
-        className="required"
-        name={"enroll"}
-        labelTitle={"報名類型"}
-        radioOption={radioOption}
-        inputValue={type}
-        isBlank={type.isBlank}
-        handleIsBlank={type.handleIsBlank}
-        errorMessage={errMsg[4]}
-      ></Radio>
-      <Input
-        id={"other"}
-        type={"text"}
-        labelTitle={"其他"}
-        subTitle={"對活動的一些建議"}
-        inputValue={other}
-        placeholder={"您的回答"}
-      ></Input>
-      <Styledsubmit type="submit" className="submit"></Styledsubmit>
-      <p>請勿透過表單送出您的密碼。</p>
-    </Styledform>
+    <>
+      <Styledform onSubmit={handleSubmitClick}>
+        <Styledtitle>新拖延運動報名表單</Styledtitle>
+        <Styledactivity>
+          活動日期:2020/12/10 ~ 2020/12/11
+          <br />
+          活動地點:台北市大安區新生南路二段1號
+        </Styledactivity>
+        <Styledwarning>*必填</Styledwarning>
+        <Input
+          className="required"
+          id={"nickname"}
+          type={"text"}
+          labelTitle={"暱稱"}
+          inputValue={nickname}
+          placeholder={"您的暱稱"}
+          isBlank={isNicknameBlank}
+          setData={setData}
+          data={data}
+          errorMessage={errMsg[0]}
+        ></Input>
+        <Input
+          className="required"
+          id={"email"}
+          type={"email"}
+          labelTitle={"電子郵件"}
+          inputValue={email}
+          placeholder={"您的電子郵件"}
+          isBlank={isEmailBlank}
+          setData={setData}
+          data={data}
+          errorMessage={errMsg[1]}
+        ></Input>
+        <Input
+          className="required"
+          id={"phoneNumber"}
+          type={"tel"}
+          labelTitle={"手機號碼"}
+          inputValue={phoneNumber}
+          placeholder={"您的手機號碼"}
+          isBlank={isPhoneNumberBlank}
+          setData={setData}
+          data={data}
+          errorMessage={errMsg[2]}
+        ></Input>
+        <Input
+          className="required"
+          id={"question"}
+          type={"text"}
+          labelTitle={"怎麼知道這個活動的"}
+          inputValue={question}
+          placeholder={"您的回答"}
+          isBlank={isQuestionBlank}
+          setData={setData}
+          data={data}
+          errorMessage={errMsg[3]}
+        ></Input>
+        <Radio
+          className="required"
+          name={"enroll"}
+          labelTitle={"報名類型"}
+          radioOption={radioOption}
+          inputValue={type}
+          isBlank={isTypeBlank}
+          setData={setData}
+          data={data}
+          errorMessage={errMsg[4]}
+        ></Radio>
+        <Input
+          id={"other"}
+          type={"text"}
+          labelTitle={"其他"}
+          subTitle={"對活動的一些建議"}
+          inputValue={other}
+          placeholder={"您的回答"}
+          setData={setData}
+          data={data}
+        ></Input>
+        <Styledsubmit type="submit" className="submit"></Styledsubmit>
+        <p>請勿透過表單送出您的密碼。</p>
+      </Styledform>
+      <Footer />
+    </>
   );
 }
 

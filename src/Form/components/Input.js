@@ -14,6 +14,7 @@ const Styledinput = styled.div`
   }
 
   & > input {
+    ${(props) => props.isBlank && `outline: 1px solid red;`}
     font-size: 100%;
     padding: 2px 3px;
     ::placeholder {
@@ -44,10 +45,19 @@ export default function Input({
   subTitle,
   className,
   isBlank,
+  setData,
+  data,
   errorMessage,
 }) {
+  const handleInputChange = (e) => {
+    inputValue.setValue(e.currentTarget.value);
+    setData({
+      ...data,
+      [id]: e.currentTarget.value,
+    });
+  };
   return (
-    <Styledinput className={className}>
+    <Styledinput className={className} isBlank={isBlank}>
       <label htmlFor={id}>{labelTitle}</label>
       {subTitle ? <p>{subTitle}</p> : ""}
       <input
@@ -55,9 +65,9 @@ export default function Input({
         type={type}
         placeholder={placeholder}
         value={inputValue.value}
-        onChange={inputValue.handleInputChange}
+        onChange={handleInputChange}
       ></input>
-      {isBlank ? <span>{errorMessage}</span> : ""}
+      {isBlank && <span>{errorMessage}</span>}
     </Styledinput>
   );
 }
