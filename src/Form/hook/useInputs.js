@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 const useInputs = (inputValue = "") => {
-  const [value, setValue] = useState(inputValue);
-
   const formData = {
     nickname: "",
     email: "",
@@ -18,8 +16,10 @@ const useInputs = (inputValue = "") => {
     question: null,
     type: null,
   };
+  const [value, setValue] = useState(inputValue);
   const [data, setData] = useState(formData);
   const [isBlankData, setIsBlankData] = useState(blankData);
+
   const handleSubmitClick = (e) => {
     let counter = 0;
     let isBlankCopy = { ...isBlankData };
@@ -33,19 +33,18 @@ const useInputs = (inputValue = "") => {
       }
     });
     setIsBlankData(isBlankCopy);
-    if (counter >= 5) {
-      alert(`報名資料如下:
+    if (counter === 5) {
+      alert(`
+      報名成功!! 
       暱稱: ${data.nickname}
       電子郵件: ${data.email}
       手機號碼: ${data.phoneNumber}
       如何知道活動: ${data.question}
       報名類型: ${data.type}
       其他:${data.other}
-
-      報名成功!!
       `);
     } else {
-      alert(`請確認資料`);
+      alert(`請確認必填資料`);
     }
   };
 

@@ -49,7 +49,7 @@ export default function Input({
   data,
   errorMessage,
 }) {
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, id) => {
     inputValue.setValue(e.currentTarget.value);
     setData({
       ...data,
@@ -65,7 +65,7 @@ export default function Input({
         type={type}
         placeholder={placeholder}
         value={inputValue.value}
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e, id)}
       ></input>
       {isBlank && <span>{errorMessage}</span>}
     </Styledinput>

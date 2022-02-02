@@ -34,6 +34,13 @@ export default function Radio({
   setData,
   data,
 }) {
+  const handleRadioChange = (value, des) => {
+    inputValue.setValue(value);
+    setData({
+      ...data,
+      type: des,
+    });
+  };
   return (
     <Styledradio className={className}>
       <p>{labelTitle}</p>
@@ -43,13 +50,7 @@ export default function Radio({
             type="radio"
             name={name}
             value={option.value}
-            onChange={(e) => {
-              inputValue.setValue(option.value);
-              setData({
-                ...data,
-                type: option.des,
-              });
-            }}
+            onChange={() => handleRadioChange(option.value, option.des)}
           />
           {option.des}
         </label>
